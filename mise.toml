@@ -1,0 +1,51 @@
+# Usage
+#  mise trust
+#  mise install
+#  mise run init
+
+[tools]
+zola = "0.19.2"
+just = "1.37.0"
+
+[env]
+#TAILWIND_VERSION = "v3.4.17"
+TAILWIND_VERSION = "v4.1.18"
+DAISYUI_VERSION = "v4.12.14"
+THEME_DIR = "./themes"
+
+[tasks.setup-assets]
+description = "goyo, TailwindCSS, DaisyUI"
+depends = ["create-dirs"]
+run = """
+#!/bin/bash
+set -e
+
+# goyo
+cd ${THEME_DIR} && git submodule add git@github.com:hidsh/goyo.git
+
+# TailwindCSS
+if [ ! -f "${THEME_DIR}/goyo/src/tailwindcss" ]; then
+    echo "Downloading TailwindCSS ${TAILWIND_VERSION}..."
+    curl -sLo "${THEME_DIR}/goyo/src/tailwindcss" "https://github.com/tailwindlabs/tailwindcss/releases/download/${TAILWIND_VERSION}/tailwindcss-linux-x64"
+    chmod +x "${THEME_DIR}/goyo/src/tailwindcss"
+else
+    echo "TailwindCSS is already installed."
+fi
+
+# DaisyUI
+echo "Downloading DaisyUI ${DAISYUI_VERSION}..."
+# JS files
+curl -sLo "${THEME_DIR}/goyo/src/daisyui.js" "https://github.com/saadeghi/daisyui/releases/download/${DAISYUI_VERSION}/daisyui.js"
+# Theme JS files
+curl -sLo "${THEME_DIR}/goyo/src/daisyui-theme.js" "https://github.com/saadeghi/daisyui/releases/download/${DAISYUI_VERSION}/daisyui-theme.js" || echo "daisyui-theme.js not found in release, skipping."
+
+echo "Assets setup complete."
+"""
+
+[tasks.create-dirs]
+description = "mkdir"
+run = "mkdir -p ${THEME_DIR}"
+
+[tasks.init]
+depends = ["setup-assets"]
+run = "echo 'Initialization complete. You can now run `just` commands.'"
