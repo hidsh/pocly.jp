@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://pocly.jp/</loc>
+    </url>
+    <url>
+        <loc>https://pocly.jp/blog/</loc>
+    </url>
+    <url>
+        <loc>https://pocly.jp/blog/1st-post/</loc>
+        <lastmod>2025-01-01</lastmod>
+    </url>
+    <url>
+        <loc>https://pocly.jp/blog/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://pocly.jp/pd/</loc>
+    </url>
+    <url>
+        <loc>https://pocly.jp/pd/foo/</loc>
+    </url>
+    <url>
+        <loc>https://pocly.jp/pd/page/1/</loc>
+    </url>
+</urlset>
